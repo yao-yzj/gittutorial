@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ import com.yao.crud.service.mapper.BillMapper;
 public class BillController {
 
 	@Autowired
+	@Qualifier("enhanced")
 	private BillMapper billMapper;
 
 	@Autowired
@@ -43,7 +45,6 @@ public class BillController {
 		Bill bill = billMapper.toEntity(billDto);
 		billRepository.save(bill);
 		Set<BillItem> items = bill.getItems();
-		//items.forEach(item -> billItemRepository.save(item));
 		for(BillItem item:items) {
 			item.setBill(bill);
 			billItemRepository.save(item);
