@@ -1,18 +1,17 @@
 package com.yao.crud.service.mapper.decorators;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.demo.dto.BillItemDto;
 import com.yao.crud.domain.BillItem;
 import com.yao.crud.service.mapper.BillItemMapper;
 
-@Component
-@Primary
+
 public class BillItemMapperDecorator implements BillItemMapper {
 
 	@Autowired
+	@Qualifier("delegate")
 	private BillItemMapper billItemMapper;
 
 	@Override
