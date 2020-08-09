@@ -2,6 +2,7 @@ package com.yao.crud.domain;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +30,7 @@ public class Bill {
 	@JoinColumn(name = "agent_id")
 	private Agent agent;
 
-	@OneToMany(mappedBy = "bill")
+	@OneToMany(mappedBy = "bill",cascade = CascadeType.ALL)
 	private Set<BillItem> items;
 
 	public String getId() {

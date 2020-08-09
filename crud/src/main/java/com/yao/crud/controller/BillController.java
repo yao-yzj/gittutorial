@@ -29,7 +29,6 @@ import com.yao.crud.service.mapper.BillMapper;
 public class BillController {
 
 	@Autowired
-	@Qualifier("enhanced")
 	private BillMapper billMapper;
 
 	@Autowired
@@ -44,11 +43,13 @@ public class BillController {
 	public String Create(@RequestBody BillDto billDto) {
 		Bill bill = billMapper.toEntity(billDto);
 		billRepository.save(bill);
-		Set<BillItem> items = bill.getItems();
-		for(BillItem item:items) {
+		/**
+		 * Set<BillItem> items = bill.getItems();
+		 *for(BillItem item:items) {
 			item.setBill(bill);
 			billItemRepository.save(item);
 		}
+		*/
 		return billMapper.toDto(bill).getId();
 	}
 
@@ -63,7 +64,7 @@ public class BillController {
 	public void Modify(@RequestBody BillDto billDto) {
 		Bill bill = billMapper.toEntity(billDto);
 		billRepository.save(bill);
-		bill.getItems().forEach(item -> item.setBill(bill));
+		//bill.getItems().forEach(item -> item.setBill(bill));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
